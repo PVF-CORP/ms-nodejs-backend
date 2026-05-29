@@ -1,5 +1,5 @@
+require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
 const { getAllItems, getItem, createItem, updateItem, deleteItem } = require('./controllers/itemController');
 const app = express();
 const swaggerUi = require('swagger-ui-express');
@@ -9,9 +9,10 @@ const swaggerSpec = require('./docs/swagger');
 //
 
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 // Rutas
+app.get('/', (req, res) => res.redirect('/home'));
 app.get('/api/items', getAllItems);
 app.get('/api/items/:id', getItem);
 app.post('/api/items', createItem);
